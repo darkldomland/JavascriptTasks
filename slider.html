@@ -7,7 +7,7 @@
 		<style>
 			body
 			{
-				background-color: #222222;
+				background-color: #202020;
 				font-size: 24px;
 				color: white;
 			}
@@ -21,41 +21,39 @@
 			
 			var timer1 = 0;
 			var timer2 = 0;
+			var timer3 = 0;
+			
 			
 			function ustawslajd(nrslajdu)
 			{
-				clearTimeout(timer1);
+			    clearTimeout(timer1);
 				clearTimeout(timer2);
 				numer = nrslajdu - 1;
-				
-				schowaj();
-				setTimeout("zmienslajd()", 500);
-				
+				hide();
+				timer3 = setTimeout("zmienslajd()", 500); 
 			}
 			
-			function schowaj()
+			function hide()
 			{
+				$("#slider").stop();
 				$("#slider").fadeOut(500);
 			}
 		
-			function zmienslajd()
+			function changeSlajd()
 			{
-				numer++; if (numer>5) numer=1;
-				
-				var plik = "<img src=\"slajdy/slajd" + numer + ".png\" />";
-				
+				clearTimeout(timer3);                                                                                      // przerwanie odliczania timera 3
+				numer++; if (numer>5) numer=1;    
+				var plik = "<img src=\"slajdy/slajd" + numer + ".png\" />";    
 				document.getElementById("slider").innerHTML = plik;
-				$("#slider").fadeIn(500);
-				
+				$("#slider").fadeIn(500);    
 				timer1 = setTimeout("zmienslajd()", 5000);
-				timer2 = setTimeout("schowaj()", 4500);
-			
+				timer2 = setTimeout("schowaj()", 4500); 
 			}
 			
 		</script>
 		
 	</head>
-	<body onload="zmienslajd()">
+	<body onload="changeSlajd()">
 	
 		<span onclick="ustawslajd(1)" style="cursor:pointer;">[ 1 ]</span>
 		<span onclick="ustawslajd(2)" style="cursor:pointer;">[ 2 ]</span>
